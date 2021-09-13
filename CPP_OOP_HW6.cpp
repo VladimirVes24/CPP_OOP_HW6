@@ -1,22 +1,34 @@
 #include <iostream>
 #include <cstdlib>
+#include <string>
 
 //Task 1 ============================================================
 
 int getInt()
 {
-    int input = 0;
+    std::string input;
+    int intInput = 0;
+   
     while (true)
     {
+        bool formatCheck = true;
         std::cout << "Enter your number: ";
-        std::cin >> input;
-        if (std::cin) return input;
+        std::getline(std::cin, input);
+        for (unsigned int i = 0; i < input.length(); i++)
+        {
+            if (!isdigit(input[i])) formatCheck = false;
+        }
+        if (formatCheck)
+        {
+            intInput = std::stoi(input);
+            return intInput;
+        }
         else
         {
             system("cls");
             std::cerr << "Incorrect format!" << std::endl;
             std::cin.clear();
-            std::cin.ignore(10000, '\n');           
+            //std::cin.ignore(10000, '\n');           
         }
     }
 }
@@ -29,8 +41,6 @@ std::ostream& endll(std::ostream &stream)
     stream.clear();
     return stream;
 }
-
-//Task 3 =============================================================
 
 int main()
 {
